@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="newClientButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="findButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>790, 103</value>
+  </metadata>
+  <metadata name="newClientButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="findButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>790, 103</value>
+  </metadata>
+  <metadata name="panelControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>637, 103</value>
+  </metadata>
+  <metadata name="panelControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>637, 103</value>
+  </metadata>
+  <metadata name="simpleButton1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>482, 103</value>
+  </metadata>
+  <metadata name="simpleButton3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>327, 103</value>
+  </metadata>
+  <metadata name="simpleButton5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>172, 103</value>
+  </metadata>
+  <metadata name="simpleButton7.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 103</value>
+  </metadata>
+  <metadata name="simpleButton8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1652, 60</value>
+  </metadata>
+  <metadata name="simpleButton9.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1497, 60</value>
+  </metadata>
+  <metadata name="simpleButton10.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1333, 60</value>
+  </metadata>
+  <metadata name="simpleButton11.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1169, 60</value>
+  </metadata>
+  <metadata name="simpleButton12.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1005, 60</value>
+  </metadata>
+  <metadata name="simpleButton13.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>841, 60</value>
+  </metadata>
+  <metadata name="simpleButton14.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>677, 60</value>
+  </metadata>
+  <metadata name="simpleButton15.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>513, 60</value>
+  </metadata>
+  <metadata name="simpleButton1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>482, 103</value>
+  </metadata>
+  <metadata name="simpleButton3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>327, 103</value>
+  </metadata>
+  <metadata name="simpleButton5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>172, 103</value>
+  </metadata>
+  <metadata name="simpleButton7.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 103</value>
+  </metadata>
+  <metadata name="simpleButton8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1652, 60</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="simpleButton8.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        W75vTsxX6FUAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="simpleButton9.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1497, 60</value>
+  </metadata>
+  <metadata name="simpleButton10.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1333, 60</value>
+  </metadata>
+  <metadata name="simpleButton11.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1169, 60</value>
+  </metadata>
+  <metadata name="simpleButton12.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1005, 60</value>
+  </metadata>
+  <metadata name="simpleButton13.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>841, 60</value>
+  </metadata>
+  <metadata name="simpleButton14.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>677, 60</value>
+  </metadata>
+  <metadata name="simpleButton15.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>513, 60</value>
+  </metadata>
+  <metadata name="addToListButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>345, 60</value>
+  </metadata>
+  <metadata name="addToListButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>345, 60</value>
+  </metadata>
+  <metadata name="productButton6.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>181, 60</value>
+  </metadata>
+  <metadata name="productButton5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 60</value>
+  </metadata>
+  <metadata name="productButton4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1570, 17</value>
+  </metadata>
+  <metadata name="productButton3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1406, 17</value>
+  </metadata>
+  <metadata name="productButton2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1242, 17</value>
+  </metadata>
+  <metadata name="productButton1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1078, 17</value>
+  </metadata>
+  <metadata name="productButton6.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>181, 60</value>
+  </metadata>
+  <metadata name="productButton5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 60</value>
+  </metadata>
+  <metadata name="productButton4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1570, 17</value>
+  </metadata>
+  <metadata name="productButton3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1406, 17</value>
+  </metadata>
+  <metadata name="productButton2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1242, 17</value>
+  </metadata>
+  <metadata name="productButton1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1078, 17</value>
+  </metadata>
+  <metadata name="exitButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>951, 17</value>
+  </metadata>
+  <metadata name="exitButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>951, 17</value>
+  </metadata>
+  <metadata name="reportButton4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>798, 17</value>
+  </metadata>
+  <metadata name="reportButton3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>645, 17</value>
+  </metadata>
+  <metadata name="reportButton2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>492, 17</value>
+  </metadata>
+  <metadata name="reportButton1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>339, 17</value>
+  </metadata>
+  <metadata name="reportButton4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>798, 17</value>
+  </metadata>
+  <metadata name="reportButton3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>645, 17</value>
+  </metadata>
+  <metadata name="reportButton2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>492, 17</value>
+  </metadata>
+  <metadata name="reportButton1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>339, 17</value>
+  </metadata>
+  <metadata name="delRowButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>186, 17</value>
+  </metadata>
+  <metadata name="delRowButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>186, 17</value>
+  </metadata>
+  <metadata name="confirmButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>919, 103</value>
+  </metadata>
+  <metadata name="cancelButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1074, 103</value>
+  </metadata>
+  <metadata name="confirmButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>919, 103</value>
+  </metadata>
+  <metadata name="cancelButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1074, 103</value>
+  </metadata>
+</root>
