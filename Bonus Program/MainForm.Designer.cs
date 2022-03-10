@@ -86,12 +86,12 @@
             this.productButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.productButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+            this.exitButton = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.reportButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.setLimitButton = new DevExpress.XtraEditors.SimpleButton();
             this.reportButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.reportButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.exitButton = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
@@ -114,8 +114,8 @@
             this.cancelButton = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.limitValue = new System.Windows.Forms.TextBox();
@@ -1069,6 +1069,21 @@
             this.tableLayoutPanel18.Size = new System.Drawing.Size(377, 237);
             this.tableLayoutPanel18.TabIndex = 1;
             // 
+            // exitButton
+            // 
+            this.exitButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.exitButton.Appearance.Font = new System.Drawing.Font("Trebuchet MS", 14F);
+            this.exitButton.Appearance.Options.UseBackColor = true;
+            this.exitButton.Appearance.Options.UseFont = true;
+            this.exitButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exitButton.Location = new System.Drawing.Point(20, 10);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(337, 39);
+            this.exitButton.TabIndex = 0;
+            this.exitButton.Text = "Exit";
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // tableLayoutPanel23
             // 
             this.tableLayoutPanel23.ColumnCount = 5;
@@ -1118,8 +1133,6 @@
             this.setLimitButton.Name = "setLimitButton";
             this.setLimitButton.Size = new System.Drawing.Size(121, 56);
             this.setLimitButton.TabIndex = 2;
-            this.setLimitButton.Text = "Limit";
-            this.setLimitButton.Click += new System.EventHandler(this.setLimitButton_Click);
             // 
             // reportButton2
             // 
@@ -1150,21 +1163,6 @@
             this.reportButton1.TabIndex = 0;
             this.reportButton1.Text = "Item Report";
             this.reportButton1.Click += new System.EventHandler(this.reportButton1_Click);
-            // 
-            // exitButton
-            // 
-            this.exitButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.exitButton.Appearance.Font = new System.Drawing.Font("Trebuchet MS", 14F);
-            this.exitButton.Appearance.Options.UseBackColor = true;
-            this.exitButton.Appearance.Options.UseFont = true;
-            this.exitButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exitButton.Location = new System.Drawing.Point(20, 10);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(337, 39);
-            this.exitButton.TabIndex = 0;
-            this.exitButton.Text = "Exit";
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // tableLayoutPanel17
             // 
@@ -1454,7 +1452,7 @@
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 113F));
             this.tableLayoutPanel22.Size = new System.Drawing.Size(319, 113);
             this.tableLayoutPanel22.TabIndex = 0;
             // 
@@ -1518,24 +1516,9 @@
             this.tableLayoutPanel27.Name = "tableLayoutPanel27";
             this.tableLayoutPanel27.RowCount = 1;
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel27.Size = new System.Drawing.Size(315, 49);
             this.tableLayoutPanel27.TabIndex = 0;
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            this.simpleButton2.Appearance.Options.UseBackColor = true;
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.simpleButton2.Location = new System.Drawing.Point(10, 10);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(10);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(137, 29);
-            this.simpleButton2.TabIndex = 0;
-            this.simpleButton2.Text = "Close";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // simpleButton4
             // 
@@ -1552,6 +1535,21 @@
             this.simpleButton4.Text = "Set Limit";
             this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.simpleButton2.Appearance.Options.UseBackColor = true;
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simpleButton2.Location = new System.Drawing.Point(10, 10);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(10);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(137, 29);
+            this.simpleButton2.TabIndex = 0;
+            this.simpleButton2.Text = "Close";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
             // tableLayoutPanel28
             // 
             this.tableLayoutPanel28.ColumnCount = 2;
@@ -1564,7 +1562,7 @@
             this.tableLayoutPanel28.Name = "tableLayoutPanel28";
             this.tableLayoutPanel28.RowCount = 1;
             this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel28.Size = new System.Drawing.Size(315, 49);
             this.tableLayoutPanel28.TabIndex = 1;
             // 
@@ -1598,7 +1596,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1556, 884);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

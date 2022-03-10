@@ -596,19 +596,21 @@ namespace Bonus_Program
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+            else if (e.Control && e.Alt && e.KeyCode == Keys.L && !isPressed)
+            {
+                isPressed = true;
+                tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
+                if (tableLayoutPanel26.Visible)
+                {
+                    limitValue.Text = MinLitresForBonus.ToString();
+                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
         }
         private void cardnumTB_KeyUp(object sender, KeyEventArgs e)
         {
             if (isPressed) isPressed = false;
-        }
-
-        private void setLimitButton_Click(object sender, EventArgs e)
-        {
-            tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
-            if(tableLayoutPanel26.Visible)
-            {
-                limitValue.Text = MinLitresForBonus.ToString();
-            }
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
