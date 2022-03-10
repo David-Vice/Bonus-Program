@@ -85,7 +85,7 @@ namespace Bonus_Program
             }
 
             dataGridView.DataSource = Query.Show(queryMain + clientFilter + cardFilter + managerFilter);
-            dataGridView.Columns[0].Width = 120;
+            dataGridView.Columns[0].Width = 200;
             dataGridView.Columns[1].Width = 120;
             dataGridView.Columns[2].Width = 100;
             dataGridView.Columns[3].Width = 100;

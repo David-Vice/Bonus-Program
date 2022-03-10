@@ -274,7 +274,7 @@
             // 
             // showButton
             // 
-            this.showButton.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
+            this.showButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.showButton.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.showButton.Appearance.Options.UseBackColor = true;
             this.showButton.Appearance.Options.UseFont = true;
@@ -289,7 +289,7 @@
             // 
             // backButton
             // 
-            this.backButton.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            this.backButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.backButton.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.backButton.Appearance.Options.UseBackColor = true;
             this.backButton.Appearance.Options.UseFont = true;
@@ -308,7 +308,7 @@
             this.productCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productCB.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
             this.productCB.FormattingEnabled = true;
-            this.productCB.Location = new System.Drawing.Point(131, 116);
+            this.productCB.Location = new System.Drawing.Point(131, 117);
             this.productCB.Name = "productCB";
             this.productCB.Size = new System.Drawing.Size(251, 36);
             this.productCB.TabIndex = 9;

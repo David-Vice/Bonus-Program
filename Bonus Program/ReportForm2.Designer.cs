@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.totalPriceLabel = new System.Windows.Forms.Label();
             this.totalLabelNoCh = new System.Windows.Forms.Label();
             this.totalLitresLabelNoCh = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.paymentLabel = new System.Windows.Forms.Label();
+            this.bonusLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.currentBonusLabel = new System.Windows.Forms.Label();
             this.usedBonusLabel = new System.Windows.Forms.Label();
@@ -58,8 +60,6 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.bonusLabel = new System.Windows.Forms.Label();
-            this.paymentLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -136,6 +136,32 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(416, 170);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
+            // paymentLabel
+            // 
+            this.paymentLabel.AutoSize = true;
+            this.paymentLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.paymentLabel.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold);
+            this.paymentLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.paymentLabel.Location = new System.Drawing.Point(190, 136);
+            this.paymentLabel.Name = "paymentLabel";
+            this.paymentLabel.Size = new System.Drawing.Size(223, 34);
+            this.paymentLabel.TabIndex = 15;
+            this.paymentLabel.Text = "0.00 AZN";
+            this.paymentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // bonusLabel
+            // 
+            this.bonusLabel.AutoSize = true;
+            this.bonusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bonusLabel.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold);
+            this.bonusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bonusLabel.Location = new System.Drawing.Point(3, 68);
+            this.bonusLabel.Name = "bonusLabel";
+            this.bonusLabel.Size = new System.Drawing.Size(181, 34);
+            this.bonusLabel.TabIndex = 14;
+            this.bonusLabel.Text = "Current bonus:";
+            this.bonusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -203,7 +229,7 @@
             // 
             // backButton
             // 
-            this.backButton.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
+            this.backButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.backButton.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.backButton.Appearance.Options.UseBackColor = true;
             this.backButton.Appearance.Options.UseFont = true;
@@ -298,7 +324,7 @@
             // 
             // showButton
             // 
-            this.showButton.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Success;
+            this.showButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.showButton.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.showButton.Appearance.Options.UseBackColor = true;
             this.showButton.Appearance.Options.UseFont = true;
@@ -448,24 +474,23 @@
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
-            this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(3, 3);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(985, 873);
@@ -502,32 +527,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1425, 885);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // bonusLabel
-            // 
-            this.bonusLabel.AutoSize = true;
-            this.bonusLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bonusLabel.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold);
-            this.bonusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bonusLabel.Location = new System.Drawing.Point(3, 68);
-            this.bonusLabel.Name = "bonusLabel";
-            this.bonusLabel.Size = new System.Drawing.Size(181, 34);
-            this.bonusLabel.TabIndex = 14;
-            this.bonusLabel.Text = "Current bonus:";
-            this.bonusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // paymentLabel
-            // 
-            this.paymentLabel.AutoSize = true;
-            this.paymentLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.paymentLabel.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold);
-            this.paymentLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.paymentLabel.Location = new System.Drawing.Point(190, 136);
-            this.paymentLabel.Name = "paymentLabel";
-            this.paymentLabel.Size = new System.Drawing.Size(223, 34);
-            this.paymentLabel.TabIndex = 15;
-            this.paymentLabel.Text = "0.00 AZN";
-            this.paymentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ReportForm2
             // 

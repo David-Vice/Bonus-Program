@@ -204,10 +204,12 @@ namespace Bonus_Program
         private void tb_Enter(object sender, EventArgs e)
         {
             focusedTextbox = (TextBox)sender;
+            (sender as TextBox).BackColor = Color.Khaki;
         }
         private void tb_Leave(object sender, EventArgs e)
         {
             focusedTextbox = null;
+            (sender as TextBox).BackColor = Color.White;
         }
 
         private void aznTB_TextChanged(object sender, EventArgs e)
@@ -285,6 +287,7 @@ namespace Bonus_Program
 
                     productLabel.Text = productFullname;
                     priceLabel.Text = productPrice.ToString("n2");
+                    aznTB.Focus();
                 }
             }
         }
@@ -429,6 +432,7 @@ namespace Bonus_Program
                 ResetFinalVals();
                 ResetClientInfo();
                 ResetProductInfo();
+                cardnumTB.Focus();
             }
             else
             {
@@ -466,6 +470,7 @@ namespace Bonus_Program
                 ResetFinalVals();
                 ResetClientInfo();
                 ResetProductInfo();
+                cardnumTB.Focus();
             }
         }
         private void newClientButton_Click(object sender, EventArgs e)
