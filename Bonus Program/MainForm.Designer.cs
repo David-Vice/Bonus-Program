@@ -86,12 +86,12 @@
             this.productButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.productButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
-            this.exitButton = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel23 = new System.Windows.Forms.TableLayoutPanel();
             this.reportButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.reportButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.setLimitButton = new DevExpress.XtraEditors.SimpleButton();
             this.reportButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.reportButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.exitButton = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
@@ -112,6 +112,13 @@
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.confirmButton = new DevExpress.XtraEditors.SimpleButton();
             this.cancelButton = new DevExpress.XtraEditors.SimpleButton();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel27 = new System.Windows.Forms.TableLayoutPanel();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.tableLayoutPanel28 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.limitValue = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -125,6 +132,7 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.quantTLP.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
@@ -142,6 +150,9 @@
             this.panel1.SuspendLayout();
             this.tableLayoutPanel21.SuspendLayout();
             this.tableLayoutPanel22.SuspendLayout();
+            this.tableLayoutPanel26.SuspendLayout();
+            this.tableLayoutPanel27.SuspendLayout();
+            this.tableLayoutPanel28.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -156,7 +167,7 @@
             this.tableLayoutPanel2.Controls.Add(this.statusLabel, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 844);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -220,7 +231,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 128F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1548, 128);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
@@ -234,7 +245,7 @@
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(5, 5);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -390,7 +401,7 @@
             this.tableLayoutPanel7.Controls.Add(this.cardnumTB, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(1011, 5);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -451,7 +462,7 @@
             this.newClientButton.Appearance.Options.UseFont = true;
             this.newClientButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newClientButton.Location = new System.Drawing.Point(409, 69);
-            this.newClientButton.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.newClientButton.Margin = new System.Windows.Forms.Padding(10);
             this.newClientButton.Name = "newClientButton";
             this.newClientButton.Size = new System.Drawing.Size(113, 39);
             this.newClientButton.TabIndex = 8;
@@ -466,7 +477,7 @@
             this.findButton.Appearance.Options.UseFont = true;
             this.findButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.findButton.Location = new System.Drawing.Point(409, 10);
-            this.findButton.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.findButton.Margin = new System.Windows.Forms.Padding(10);
             this.findButton.Name = "findButton";
             this.findButton.Size = new System.Drawing.Size(113, 39);
             this.findButton.TabIndex = 9;
@@ -546,7 +557,7 @@
             this.panelControl1.Controls.Add(this.tableLayoutPanel12);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(4, 4);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(516, 476);
             this.panelControl1.TabIndex = 0;
@@ -571,7 +582,7 @@
             this.tableLayoutPanel12.Controls.Add(this.simpleButton15, 1, 2);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel12.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 4;
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -899,7 +910,7 @@
             this.addToListButton.Appearance.Options.UseForeColor = true;
             this.addToListButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addToListButton.Location = new System.Drawing.Point(263, 5);
-            this.addToListButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.addToListButton.Margin = new System.Windows.Forms.Padding(5);
             this.addToListButton.Name = "addToListButton";
             this.addToListButton.Size = new System.Drawing.Size(248, 48);
             this.addToListButton.TabIndex = 5;
@@ -1058,21 +1069,6 @@
             this.tableLayoutPanel18.Size = new System.Drawing.Size(377, 237);
             this.tableLayoutPanel18.TabIndex = 1;
             // 
-            // exitButton
-            // 
-            this.exitButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.exitButton.Appearance.Font = new System.Drawing.Font("Trebuchet MS", 14F);
-            this.exitButton.Appearance.Options.UseBackColor = true;
-            this.exitButton.Appearance.Options.UseFont = true;
-            this.exitButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exitButton.Location = new System.Drawing.Point(20, 10);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(337, 39);
-            this.exitButton.TabIndex = 0;
-            this.exitButton.Text = "Exit";
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
-            // 
             // tableLayoutPanel23
             // 
             this.tableLayoutPanel23.ColumnCount = 5;
@@ -1082,7 +1078,7 @@
             this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel23.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel23.Controls.Add(this.reportButton4, 3, 3);
-            this.tableLayoutPanel23.Controls.Add(this.reportButton3, 1, 3);
+            this.tableLayoutPanel23.Controls.Add(this.setLimitButton, 1, 3);
             this.tableLayoutPanel23.Controls.Add(this.reportButton2, 3, 1);
             this.tableLayoutPanel23.Controls.Add(this.reportButton1, 1, 1);
             this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1095,6 +1091,7 @@
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel23.Size = new System.Drawing.Size(369, 174);
             this.tableLayoutPanel23.TabIndex = 1;
             // 
@@ -1109,16 +1106,20 @@
             this.reportButton4.Size = new System.Drawing.Size(121, 56);
             this.reportButton4.TabIndex = 3;
             // 
-            // reportButton3
+            // setLimitButton
             // 
-            this.reportButton3.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.reportButton3.Appearance.Options.UseBackColor = true;
-            this.reportButton3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportButton3.Location = new System.Drawing.Point(40, 96);
-            this.reportButton3.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.reportButton3.Name = "reportButton3";
-            this.reportButton3.Size = new System.Drawing.Size(121, 56);
-            this.reportButton3.TabIndex = 2;
+            this.setLimitButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.setLimitButton.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.setLimitButton.Appearance.Options.UseBackColor = true;
+            this.setLimitButton.Appearance.Options.UseFont = true;
+            this.setLimitButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.setLimitButton.Location = new System.Drawing.Point(40, 96);
+            this.setLimitButton.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.setLimitButton.Name = "setLimitButton";
+            this.setLimitButton.Size = new System.Drawing.Size(121, 56);
+            this.setLimitButton.TabIndex = 2;
+            this.setLimitButton.Text = "Limit";
+            this.setLimitButton.Click += new System.EventHandler(this.setLimitButton_Click);
             // 
             // reportButton2
             // 
@@ -1149,6 +1150,21 @@
             this.reportButton1.TabIndex = 0;
             this.reportButton1.Text = "Item Report";
             this.reportButton1.Click += new System.EventHandler(this.reportButton1_Click);
+            // 
+            // exitButton
+            // 
+            this.exitButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.exitButton.Appearance.Font = new System.Drawing.Font("Trebuchet MS", 14F);
+            this.exitButton.Appearance.Options.UseBackColor = true;
+            this.exitButton.Appearance.Options.UseFont = true;
+            this.exitButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.exitButton.Location = new System.Drawing.Point(20, 10);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(337, 39);
+            this.exitButton.TabIndex = 0;
+            this.exitButton.Text = "Exit";
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // tableLayoutPanel17
             // 
@@ -1182,7 +1198,7 @@
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 455F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 456F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(609, 456);
             this.tableLayoutPanel11.TabIndex = 0;
             // 
@@ -1414,6 +1430,7 @@
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel22, 0, 1);
+            this.tableLayoutPanel21.Controls.Add(this.tableLayoutPanel26, 0, 0);
             this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel21.Location = new System.Drawing.Point(278, 2);
             this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
@@ -1449,7 +1466,7 @@
             this.confirmButton.Appearance.Options.UseFont = true;
             this.confirmButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.confirmButton.Location = new System.Drawing.Point(179, 20);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(20);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(120, 73);
             this.confirmButton.TabIndex = 1;
@@ -1464,12 +1481,114 @@
             this.cancelButton.Appearance.Options.UseFont = true;
             this.cancelButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cancelButton.Location = new System.Drawing.Point(20, 20);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(20);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(119, 73);
             this.cancelButton.TabIndex = 0;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tableLayoutPanel26.ColumnCount = 1;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel27, 0, 1);
+            this.tableLayoutPanel26.Controls.Add(this.tableLayoutPanel28, 0, 0);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 2;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(321, 110);
+            this.tableLayoutPanel26.TabIndex = 1;
+            this.tableLayoutPanel26.Visible = false;
+            // 
+            // tableLayoutPanel27
+            // 
+            this.tableLayoutPanel27.ColumnCount = 2;
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel27.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel27.Controls.Add(this.simpleButton4, 1, 0);
+            this.tableLayoutPanel27.Controls.Add(this.simpleButton2, 0, 0);
+            this.tableLayoutPanel27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel27.Location = new System.Drawing.Point(3, 58);
+            this.tableLayoutPanel27.Name = "tableLayoutPanel27";
+            this.tableLayoutPanel27.RowCount = 1;
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(315, 49);
+            this.tableLayoutPanel27.TabIndex = 0;
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.simpleButton2.Appearance.Options.UseBackColor = true;
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simpleButton2.Location = new System.Drawing.Point(10, 10);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(10);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(137, 29);
+            this.simpleButton2.TabIndex = 0;
+            this.simpleButton2.Text = "Close";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.simpleButton4.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.simpleButton4.Appearance.Options.UseBackColor = true;
+            this.simpleButton4.Appearance.Options.UseFont = true;
+            this.simpleButton4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simpleButton4.Location = new System.Drawing.Point(167, 10);
+            this.simpleButton4.Margin = new System.Windows.Forms.Padding(10);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(138, 29);
+            this.simpleButton4.TabIndex = 1;
+            this.simpleButton4.Text = "Set Limit";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            // 
+            // tableLayoutPanel28
+            // 
+            this.tableLayoutPanel28.ColumnCount = 2;
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel28.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel28.Controls.Add(this.limitValue, 1, 0);
+            this.tableLayoutPanel28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel28.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel28.Name = "tableLayoutPanel28";
+            this.tableLayoutPanel28.RowCount = 1;
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(315, 49);
+            this.tableLayoutPanel28.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Sitka Small", 10F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(3, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(151, 25);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Minimal Limit: ";
+            // 
+            // limitValue
+            // 
+            this.limitValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.limitValue.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.limitValue.Location = new System.Drawing.Point(160, 10);
+            this.limitValue.Name = "limitValue";
+            this.limitValue.Size = new System.Drawing.Size(118, 28);
+            this.limitValue.TabIndex = 3;
+            this.limitValue.Enter += new System.EventHandler(this.tb_Enter);
+            this.limitValue.Leave += new System.EventHandler(this.tb_Leave);
             // 
             // MainForm
             // 
@@ -1506,6 +1625,7 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.quantTLP.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
@@ -1527,6 +1647,10 @@
             this.panel1.PerformLayout();
             this.tableLayoutPanel21.ResumeLayout(false);
             this.tableLayoutPanel22.ResumeLayout(false);
+            this.tableLayoutPanel26.ResumeLayout(false);
+            this.tableLayoutPanel27.ResumeLayout(false);
+            this.tableLayoutPanel28.ResumeLayout(false);
+            this.tableLayoutPanel28.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1610,11 +1734,18 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
         private DevExpress.XtraEditors.SimpleButton reportButton1;
         private DevExpress.XtraEditors.SimpleButton reportButton2;
-        private DevExpress.XtraEditors.SimpleButton reportButton3;
+        private DevExpress.XtraEditors.SimpleButton setLimitButton;
         private DevExpress.XtraEditors.SimpleButton reportButton4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel28;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox limitValue;
     }
 }

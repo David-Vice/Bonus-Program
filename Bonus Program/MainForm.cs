@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Bonus_Program
 {
     public partial class MainForm : DevExpress.XtraEditors.XtraForm
     {
         private TextBox focusedTextbox = null;
+        public int MinLitresForBonus { get; set; }
 
         private void InitializeGV()
         {
@@ -38,12 +41,14 @@ namespace Bonus_Program
         private float useBonus;
         private float payment;
         private float newBonus;
+        private float totalLitres;
         private void ResetFinalVals()
         {
             total = 0;
             useBonus = 0;
             payment = 0;
             newBonus = 0;
+            totalLitres = 0;
         }
         private void ResetFinal()
         {
@@ -164,6 +169,7 @@ namespace Bonus_Program
                     statusLabel.Text = "Status: " + "User";
                 }
             }
+            GetMinLimit();
         }
         private void ResetForm()
         {
@@ -204,7 +210,7 @@ namespace Bonus_Program
         private void tb_Enter(object sender, EventArgs e)
         {
             focusedTextbox = (TextBox)sender;
-            (sender as TextBox).BackColor = Color.Khaki;
+            (sender as TextBox).BackColor = Color.LightSteelBlue;
         }
         private void tb_Leave(object sender, EventArgs e)
         {
@@ -324,11 +330,14 @@ namespace Bonus_Program
         private void UpdateTotal()
         {
             float finalTotal = 0;
+            float finalTotalLitres = 0;
             for (int i = 0; i < currentGV.Rows.Count; i++)
             {
                 finalTotal += Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
+                finalTotalLitres += Convert.ToSingle(currentGV.Rows[i].Cells["Litres"].Value.ToString());
             }
             total = finalTotal;
+            totalLitres = finalTotalLitres;
 
             if(total>0)
             {
@@ -356,7 +365,7 @@ namespace Bonus_Program
                 finalNewBonus += (subtotal - (subtotal / finalTotal * useBonus))*(productPercent/100);
             }
             newBonus = finalNewBonus;
-            if (clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname")) newBonus = 0;
+            if (clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname") || totalLitres<MinLitresForBonus) newBonus = 0;
 
             finalTotalLabel.Text = total.ToString("n2");
             finalPaymentLabel.Text = payment.ToString("n2");
@@ -409,6 +418,40 @@ namespace Bonus_Program
                     string bonusInsertQuery = $@"INSERT INTO Bonus(ClientId, ManagerId, UsedBonus, NewBonus, Payed, Total, Date)
                                              OUTPUT INSERTED.ID
                                              VALUES({clientId}, {managerId}, 0, 0, CAST({payment} as decimal(10,2)), CAST({total} as decimal(10,2)), GETDATE())";
+                    SqlCommand bonusInsertCommand = new SqlCommand(bonusInsertQuery, connection);
+                    int lastBonusId = Convert.ToInt32(bonusInsertCommand.ExecuteScalar());
+
+                    for (int i = 0; i < currentGV.Rows.Count; i++)
+                    {
+                        string productForDb = currentGV.Rows[i].Cells["Product"].Value.ToString();
+                        float quantForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Litres"].Value.ToString());
+                        float totalForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
+
+                        string query = $@"INSERT INTO Movement(ProductId, BonusId, Quantity, Total)
+                                      SELECT Product.Id,{lastBonusId},CAST({quantForDb} as decimal(10,2)),CAST({totalForDb}as decimal(10,2))
+                                      FROM Product
+                                      WHERE Product.Fullname = '{productForDb}';";
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                ResetForm();
+                ResetGV();
+                ResetFinal();
+                ResetFinalVals();
+                ResetClientInfo();
+                ResetProductInfo();
+                cardnumTB.Focus();
+            }
+            else if(totalLitres<MinLitresForBonus)
+            {
+                using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
+                {
+                    connection.Open();
+
+                    string bonusInsertQuery = $@"INSERT INTO Bonus(ClientId, ManagerId, UsedBonus, NewBonus, Payed, Total, Date)
+                                             OUTPUT INSERTED.ID
+                                             VALUES({clientId}, {managerId}, CAST({useBonus} as decimal(10,2)), 0, CAST({payment} as decimal(10,2)), CAST({total} as decimal(10,2)), GETDATE())";
                     SqlCommand bonusInsertCommand = new SqlCommand(bonusInsertQuery, connection);
                     int lastBonusId = Convert.ToInt32(bonusInsertCommand.ExecuteScalar());
 
@@ -559,9 +602,59 @@ namespace Bonus_Program
             if (isPressed) isPressed = false;
         }
 
-        private void JavidMajidzade()
+        private void setLimitButton_Click(object sender, EventArgs e)
         {
-            int This_bonus_program_was_developed_by_Javid_Majidzade = 7;
+            tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
+            if(tableLayoutPanel26.Visible)
+            {
+                limitValue.Text = MinLitresForBonus.ToString();
+            }
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            tableLayoutPanel26.Visible = false;
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            SaveMinLimit();
+            if(limitValue.Text == String.Empty)
+            {
+                MinLitresForBonus = 0;
+            }
+            else
+            {
+                MinLitresForBonus = Int32.Parse(limitValue.Text);
+            }
+            tableLayoutPanel26.Visible = false;
+        }
+
+        private void SaveMinLimit()
+        {
+            LimitValue minLimit = new LimitValue();
+            if(limitValue.Text == String.Empty)
+            {
+                minLimit.MinLimit = 0;
+            }
+            else
+            {
+                minLimit.MinLimit = Int32.Parse(limitValue.Text);
+            }
+            using (StreamWriter file = File.CreateText("limit.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, minLimit);
+            }
+        }
+        private void GetMinLimit()
+        {
+            using (StreamReader r = new StreamReader("limit.json"))
+            {
+                string json = r.ReadToEnd();
+                LimitValue limit = JsonConvert.DeserializeObject<LimitValue>(json);
+                MinLitresForBonus = limit.MinLimit;
+            }
         }
     }
 }
