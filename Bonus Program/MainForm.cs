@@ -449,6 +449,10 @@ namespace Bonus_Program
                 {
                     connection.Open();
 
+                    string queryUpdate = $@"UPDATE Client SET Client.Bonus = CAST({clientBonus - useBonus} as decimal(10,2)) WHERE Client.Id = {clientId};";
+                    SqlCommand commandUpdate = new SqlCommand(queryUpdate, connection);
+                    commandUpdate.ExecuteNonQuery();
+
                     string bonusInsertQuery = $@"INSERT INTO Bonus(ClientId, ManagerId, UsedBonus, NewBonus, Payed, Total, Date)
                                              OUTPUT INSERTED.ID
                                              VALUES({clientId}, {managerId}, CAST({useBonus} as decimal(10,2)), 0, CAST({payment} as decimal(10,2)), CAST({total} as decimal(10,2)), GETDATE())";
