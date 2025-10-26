@@ -1034,6 +1034,7 @@
             this.productButton2.Size = new System.Drawing.Size(123, 87);
             this.productButton2.TabIndex = 8;
             this.productButton2.Text = "AI-95";
+            this.productButton1.Click += new System.EventHandler(this.productButton_Click);
             // 
             // productButton1
             // 
