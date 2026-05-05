@@ -1576,7 +1576,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 25);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Minimal Limit: ";
+            this.label4.Text = "Minimal Price: ";
             // 
             // limitValue
             // 

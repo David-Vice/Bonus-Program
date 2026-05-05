@@ -8,6 +8,6 @@ namespace Bonus_Program
 {
     public class LimitValue
     {
-        public int MinLimit { get; set; }
+        public float MinPrice { get; set; }
     }
 }

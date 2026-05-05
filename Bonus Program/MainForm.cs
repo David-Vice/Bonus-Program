@@ -17,7 +17,11 @@ namespace Bonus_Program
     public partial class MainForm : DevExpress.XtraEditors.XtraForm
     {
         private TextBox focusedTextbox = null;
-        public int MinLitresForBonus { get; set; }
+        public float MinPriceForBonus { get; set; }
+        private const float MinBonusRedeem = 1f;
+
+        private Label flashLabel;
+        private System.Windows.Forms.Timer flashTimer;
 
         private void InitializeGV()
         {
@@ -170,6 +174,44 @@ namespace Bonus_Program
                 }
             }
             GetMinLimit();
+            InitFlashMessage();
+        }
+
+        private void InitFlashMessage()
+        {
+            flashLabel = new Label
+            {
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Tahoma", 12F, FontStyle.Bold),
+                BackColor = Color.FromArgb(255, 255, 192),
+                ForeColor = Color.Black,
+                BorderStyle = BorderStyle.FixedSingle,
+                Visible = false,
+                Size = new Size(280, 40),
+                Location = new Point((this.ClientSize.Width - 280) / 2, 12),
+                Anchor = AnchorStyles.Top,
+            };
+            this.Controls.Add(flashLabel);
+            flashLabel.BringToFront();
+
+            flashTimer = new System.Windows.Forms.Timer { Interval = 2000 };
+            flashTimer.Tick += FlashTimer_Tick;
+        }
+
+        private void FlashTimer_Tick(object sender, EventArgs e)
+        {
+            flashTimer.Stop();
+            flashLabel.Visible = false;
+        }
+
+        private void FlashMessage(string text)
+        {
+            flashLabel.Text = text;
+            flashLabel.Visible = true;
+            flashLabel.BringToFront();
+            flashTimer.Stop();
+            flashTimer.Start();
         }
         private void ResetForm()
         {
@@ -365,7 +407,7 @@ namespace Bonus_Program
                 finalNewBonus += (subtotal - (subtotal / finalTotal * useBonus))*(productPercent/100);
             }
             newBonus = finalNewBonus;
-            if (clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname") || totalLitres<MinLitresForBonus) newBonus = 0;
+            if (clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname") || total<MinPriceForBonus) newBonus = 0;
 
             finalTotalLabel.Text = total.ToString("n2");
             finalPaymentLabel.Text = payment.ToString("n2");
@@ -405,6 +447,10 @@ namespace Bonus_Program
             {
                 MessageBox.Show("Payment can't be less than 0!", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if(useBonus>0 && useBonus<MinBonusRedeem)
+            {
+                FlashMessage("Below the limit!");
+            }
             else if(clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname"))
             {
                 using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
@@ -443,7 +489,7 @@ namespace Bonus_Program
                 ResetProductInfo();
                 cardnumTB.Focus();
             }
-            else if(totalLitres<MinLitresForBonus)
+            else if(total<MinPriceForBonus)
             {
                 using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
                 {
@@ -606,7 +652,7 @@ namespace Bonus_Program
                 tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
                 if (tableLayoutPanel26.Visible)
                 {
-                    limitValue.Text = MinLitresForBonus.ToString();
+                    limitValue.Text = MinPriceForBonus.ToString("n2");
                 }
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -627,11 +673,11 @@ namespace Bonus_Program
             SaveMinLimit();
             if(limitValue.Text == String.Empty)
             {
-                MinLitresForBonus = 0;
+                MinPriceForBonus = 0;
             }
             else
             {
-                MinLitresForBonus = Int32.Parse(limitValue.Text);
+                MinPriceForBonus = Single.Parse(limitValue.Text);
             }
             tableLayoutPanel26.Visible = false;
         }
@@ -641,11 +687,11 @@ namespace Bonus_Program
             LimitValue minLimit = new LimitValue();
             if(limitValue.Text == String.Empty)
             {
-                minLimit.MinLimit = 0;
+                minLimit.MinPrice = 0;
             }
             else
             {
-                minLimit.MinLimit = Int32.Parse(limitValue.Text);
+                minLimit.MinPrice = Single.Parse(limitValue.Text);
             }
             using (StreamWriter file = File.CreateText("limit.json"))
             {
@@ -655,11 +701,16 @@ namespace Bonus_Program
         }
         private void GetMinLimit()
         {
+            if (!File.Exists("limit.json"))
+            {
+                MinPriceForBonus = 0;
+                return;
+            }
             using (StreamReader r = new StreamReader("limit.json"))
             {
                 string json = r.ReadToEnd();
                 LimitValue limit = JsonConvert.DeserializeObject<LimitValue>(json);
-                MinLitresForBonus = limit.MinLimit;
+                MinPriceForBonus = limit.MinPrice;
             }
         }
     }
