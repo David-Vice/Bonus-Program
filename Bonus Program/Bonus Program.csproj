@@ -225,8 +225,16 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -246,6 +254,8 @@
     <Compile Include="ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\BonusDbContext.cs" />
+    <Compile Include="Data\BonusDbInitializer.cs" />
     <Compile Include="ExitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +263,12 @@
       <DependentUpon>ExitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LimitValue.cs" />
+    <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\BonusTransaction.cs" />
+    <Compile Include="Models\Movement.cs" />
+    <Compile Include="ScannerInputHandler.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

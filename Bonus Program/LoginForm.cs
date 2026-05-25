@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using System.Data.SqlClient;
 using System.Configuration;
+using Bonus_Program.Data;
 
 namespace Bonus_Program
 {
@@ -17,7 +12,7 @@ namespace Bonus_Program
     {
         public static string ConStr { get; set; }
         public int ManagerId { get; set; }
-
+        public bool ManagerIsAdmin { get; set; }
 
         public LoginForm()
         {
@@ -27,28 +22,32 @@ namespace Bonus_Program
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            DataTable managers = Query.Show("SELECT Manager.Login FROM [Manager];");
-            foreach (DataRow row in managers.Rows)
+            using (var db = new BonusDbContext())
             {
-                managerCB.Properties.Items.Add(row[0].ToString());
-                managerCB.SelectedIndex = 0;
+                var logins = db.Managers.Select(m => m.Login).ToList();
+                foreach (var login in logins)
+                {
+                    managerCB.Properties.Items.Add(login);
+                }
+                if (managerCB.Properties.Items.Count > 0)
+                    managerCB.SelectedIndex = 0;
             }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(ConStr))
-            {
-                connection.Open();
-                string passQuery = $@"SELECT Manager.Password FROM Manager WHERE Manager.Login = '{managerCB.SelectedItem.ToString()}';";
-                SqlCommand passCommand = new SqlCommand(passQuery, connection);
-                string password = Convert.ToString(passCommand.ExecuteScalar());
+            if (managerCB.SelectedItem == null) return;
 
-                if (password == passTB.Text)
+            string selectedLogin = managerCB.SelectedItem.ToString();
+            string enteredPassword = passTB.Text;
+
+            using (var db = new BonusDbContext())
+            {
+                var manager = db.Managers.FirstOrDefault(m => m.Login == selectedLogin);
+                if (manager != null && manager.Password == enteredPassword)
                 {
-                    string managerQuery = $@"SELECT Manager.Id FROM Manager WHERE Manager.Login = '{managerCB.SelectedItem.ToString()}' AND Manager.Password = '{passTB.Text}';";
-                    SqlCommand managerCommand = new SqlCommand(managerQuery, connection);
-                    this.ManagerId = Convert.ToInt32(managerCommand.ExecuteScalar());
+                    this.ManagerId = manager.Id;
+                    this.ManagerIsAdmin = manager.Admin;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

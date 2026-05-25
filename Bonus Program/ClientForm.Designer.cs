@@ -321,6 +321,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ClientForm";
             this.Text = "ClientForm";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ClientForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

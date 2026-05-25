@@ -1,30 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Diagnostics;
-using System.Data.SqlClient;
+using Bonus_Program.Data;
+using Bonus_Program.Models;
 
 namespace Bonus_Program
 {
     public partial class ClientForm : DevExpress.XtraEditors.XtraForm
     {
-
-        private string getTable = "SELECT Client.Name, Client.Lastname, Client.Cardnumber, Client.Bonus FROM Client";
-
         public ClientForm()
         {
             InitializeComponent();
         }
         private void ClientForm_Load(object sender, EventArgs e)
         {
-            dataGridView.DataSource = Query.Show(getTable);
+            RefreshGrid();
+        }
+
+        private void RefreshGrid()
+        {
+            using (var db = new BonusDbContext())
+            {
+                var clients = db.Clients.Select(c => new
+                {
+                    c.Name,
+                    c.Lastname,
+                    c.CardNumber,
+                    c.Bonus
+                }).ToList();
+
+                var dt = new DataTable();
+                dt.Columns.Add("Name", typeof(string));
+                dt.Columns.Add("Lastname", typeof(string));
+                dt.Columns.Add("CardNumber", typeof(string));
+                dt.Columns.Add("Bonus", typeof(decimal));
+
+                foreach (var c in clients)
+                    dt.Rows.Add(c.Name, c.Lastname, c.CardNumber, c.Bonus);
+
+                dataGridView.DataSource = dt;
+            }
 
             dataGridView.Columns[0].Width = 200;
             dataGridView.Columns[1].Width = 200;
@@ -38,17 +56,19 @@ namespace Bonus_Program
         }
         private void addClient_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
+            using (var db = new BonusDbContext())
             {
-                connection.Open();
-                string query = $@"INSERT INTO [Client] (Name,Lastname,Cardnumber)
-                                  VALUES('{nameTB.Text}','{lastnameTB.Text}','{cardTB.Text}')";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
+                db.Clients.Add(new Client
+                {
+                    Name = nameTB.Text,
+                    Lastname = lastnameTB.Text,
+                    CardNumber = cardTB.Text,
+                    Bonus = 0
+                });
+                db.SaveChanges();
             }
-            
-            dataGridView.DataSource = Query.Show(getTable);
+
+            RefreshGrid();
             nameTB.Text = string.Empty;
             lastnameTB.Text = string.Empty;
             cardTB.Text = string.Empty;
@@ -68,7 +88,7 @@ namespace Bonus_Program
                     return;
                 Process.Start("osk.exe");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

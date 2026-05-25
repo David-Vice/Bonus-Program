@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.IO;
+using Bonus_Program.Data;
 
 namespace Bonus_Program
 {
@@ -22,6 +19,9 @@ namespace Bonus_Program
 
         private Label flashLabel;
         private System.Windows.Forms.Timer flashTimer;
+
+        private readonly bool _isAdmin;
+        private ScannerInputHandler _scannerHandler;
 
         private void InitializeGV()
         {
@@ -40,7 +40,6 @@ namespace Bonus_Program
             currentGV.Rows.Clear();
         }
 
-        //Final Values
         private float total;
         private float useBonus;
         private float payment;
@@ -62,7 +61,6 @@ namespace Bonus_Program
             finalPaymentLabel.Text = "0.00";
         }
 
-        //Client
         private int clientId;
         private string clientName;
         private string clientLastname;
@@ -70,13 +68,18 @@ namespace Bonus_Program
         private float clientBonus;
         private void GetClientInfo(int clientId)
         {
-            DataTable clientData = Query.Show($"SELECT Client.Id, Client.Name, Client.Lastname, Client.CardNumber, Client.Bonus FROM Client WHERE Client.Id = {clientId}");
-            DataRow clientRow = clientData.Rows[0];
-            this.clientId = Convert.ToInt32(clientRow[0]);
-            clientName = Convert.ToString(clientRow[1]);
-            clientLastname = Convert.ToString(clientRow[2]);
-            clientCardNumber = Convert.ToString(clientRow[3]);
-            clientBonus = Convert.ToSingle(clientRow[4]);
+            using (var db = new BonusDbContext())
+            {
+                var client = db.Clients.Find(clientId);
+                if (client != null)
+                {
+                    this.clientId = client.Id;
+                    clientName = client.Name;
+                    clientLastname = client.Lastname;
+                    clientCardNumber = client.CardNumber;
+                    clientBonus = (float)client.Bonus;
+                }
+            }
         }
         private void ResetClientInfo()
         {
@@ -87,23 +90,25 @@ namespace Bonus_Program
             clientBonus = -1;
         }
 
-        //Manager
         private int managerId;
         private string managerName;
         private string managerLastname;
         private string managerLogin;
-        private string managerPassword;
         private bool managerIsAdmin;
         private void GetManagerInfo(int managerId)
         {
-            DataTable managerData = Query.Show($"SELECT Manager.Id, Manager.Name, Manager.Lastname, Manager.Login, Manager.Password, Manager.Admin FROM Manager WHERE Manager.Id = {managerId}");
-            DataRow managerRow = managerData.Rows[0];
-            this.managerId = Convert.ToInt32(managerRow[0]);
-            managerName = Convert.ToString(managerRow[1]);
-            managerLastname = Convert.ToString(managerRow[2]);
-            managerLogin = Convert.ToString(managerRow[3]);
-            managerPassword = Convert.ToString(managerRow[4]);
-            managerIsAdmin = Convert.ToBoolean(managerRow[5]);
+            using (var db = new BonusDbContext())
+            {
+                var manager = db.Managers.Find(managerId);
+                if (manager != null)
+                {
+                    this.managerId = manager.Id;
+                    managerName = manager.Name;
+                    managerLastname = manager.Lastname;
+                    managerLogin = manager.Login;
+                    managerIsAdmin = manager.Admin;
+                }
+            }
         }
         private void ResetManagerInfo()
         {
@@ -111,23 +116,26 @@ namespace Bonus_Program
             managerName = string.Empty;
             managerLastname = string.Empty;
             managerLogin = string.Empty;
-            managerPassword = string.Empty;
             managerIsAdmin = false;
         }
 
-        //Product
         private int productId;
         private string productFullname;
         private float productPrice;
         private float productBonusPercent;
         private void GetProductInfo(int productId)
         {
-            DataTable productData = Query.Show($"SELECT Product.Id, Product.Fullname, Product.Price, Product.BonusPercent FROM Product WHERE Product.Id = {productId}");
-            DataRow productRow = productData.Rows[0];
-            this.productId = Convert.ToInt32(productRow[0]);
-            productFullname = Convert.ToString(productRow[1]);
-            productPrice = Convert.ToSingle(productRow[2]);
-            productBonusPercent = Convert.ToSingle(productRow[3]);
+            using (var db = new BonusDbContext())
+            {
+                var product = db.Products.Find(productId);
+                if (product != null)
+                {
+                    this.productId = product.Id;
+                    productFullname = product.Fullname;
+                    productPrice = (float)product.Price;
+                    productBonusPercent = (float)product.BonusPercent;
+                }
+            }
         }
         private void ResetProductInfo()
         {
@@ -146,8 +154,9 @@ namespace Bonus_Program
             ResetManagerInfo();
             ResetClientInfo();
             ResetProductInfo();
+            _isAdmin = false;
         }
-        public MainForm(int managerId)
+        public MainForm(int managerId, bool isAdmin)
         {
             InitializeComponent();
             InitializeGV();
@@ -157,21 +166,40 @@ namespace Bonus_Program
             ResetClientInfo();
             ResetProductInfo();
 
+            _isAdmin = isAdmin;
             GetManagerInfo(managerId);
+            ConfigureForRole();
         }
+
+        private void ConfigureForRole()
+        {
+            if (!_isAdmin)
+            {
+                cardnumTB.ReadOnly = true;
+                _scannerHandler = new ScannerInputHandler(cardnumTB, () => FindClient());
+
+                cardnumTB.KeyDown += (s, ev) =>
+                {
+                    if (ev.KeyCode == Keys.Back || ev.KeyCode == Keys.Delete)
+                    {
+                        cardnumTB.Text = string.Empty;
+                        ResetForm();
+                        ResetGV();
+                        ResetFinal();
+                        ResetFinalVals();
+                        ResetClientInfo();
+                        ResetProductInfo();
+                    }
+                };
+            }
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if(Convert.ToBoolean(managerId))
+            if (managerId != 0)
             {
-                cashierLabel.Text = "Cashier: " + managerName + " " + managerLastname; 
-                if (managerIsAdmin)
-                {
-                    statusLabel.Text = "Status: " + "Admin";
-                }
-                else
-                {
-                    statusLabel.Text = "Status: " + "User";
-                }
+                cashierLabel.Text = "Cashier: " + managerName + " " + managerLastname;
+                statusLabel.Text = _isAdmin ? "Status: Admin" : "Status: Cashier";
             }
             GetMinLimit();
             InitFlashMessage();
@@ -312,25 +340,23 @@ namespace Bonus_Program
 
         private void productButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
+            string buttonText = (sender as SimpleButton).Text;
+            using (var db = new BonusDbContext())
             {
-                connection.Open();
-                string productIdQuery = $@"SELECT Product.Id FROM Product WHERE Product.Fullname = '{(sender as SimpleButton).Text}';";
-                SqlCommand productIdCommand = new SqlCommand(productIdQuery, connection);
-                int productId = Convert.ToInt32(productIdCommand.ExecuteScalar());
+                var product = db.Products.FirstOrDefault(p => p.Fullname == buttonText);
 
                 ResetProductPartForm();
                 ResetSubtotalPartForm();
                 ResetProductInfo();
                 quantTLP.Enabled = false;
 
-                if (productId == 0)
+                if (product == null)
                 {
                     MessageBox.Show("No such product in DB!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    GetProductInfo(productId);
+                    GetProductInfo(product.Id);
                     quantTLP.Enabled = true;
 
                     productLabel.Text = productFullname;
@@ -359,7 +385,7 @@ namespace Bonus_Program
         }
         private void finalUseBonusTB_TextChanged(object sender, EventArgs e)
         {
-            if(finalUseBonusTB.Text == string.Empty)
+            if (finalUseBonusTB.Text == string.Empty)
             {
                 useBonus = 0;
             }
@@ -381,7 +407,7 @@ namespace Bonus_Program
             total = finalTotal;
             totalLitres = finalTotalLitres;
 
-            if(total>0)
+            if (total > 0)
             {
                 finalUseBonusTB.Enabled = true;
             }
@@ -394,20 +420,22 @@ namespace Bonus_Program
             payment = total - useBonus;
 
             float finalNewBonus = 0;
-            float subtotal = 0;
-            string currentProductName = "";
-            for (int i = 0; i < currentGV.Rows.Count; i++)
+            using (var db = new BonusDbContext())
             {
-                subtotal = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
-                currentProductName = currentGV.Rows[i].Cells["Product"].Value.ToString();
-                DataTable productData = Query.Show($"SELECT Product.BonusPercent FROM Product WHERE Product.Fullname = '{currentProductName}'");
-                DataRow productRow = productData.Rows[0];
-                float productPercent = Convert.ToSingle(productRow[0]);
-
-                finalNewBonus += (subtotal - (subtotal / finalTotal * useBonus))*(productPercent/100);
+                for (int i = 0; i < currentGV.Rows.Count; i++)
+                {
+                    float subtotal = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
+                    string currentProductName = currentGV.Rows[i].Cells["Product"].Value.ToString();
+                    var product = db.Products.FirstOrDefault(p => p.Fullname == currentProductName);
+                    if (product != null)
+                    {
+                        float productPercent = (float)product.BonusPercent;
+                        finalNewBonus += (subtotal - (subtotal / finalTotal * useBonus)) * (productPercent / 100);
+                    }
+                }
             }
             newBonus = finalNewBonus;
-            if (clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname") || total<MinPriceForBonus) newBonus = 0;
+            if (clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname") || total < MinPriceForBonus) newBonus = 0;
 
             finalTotalLabel.Text = total.ToString("n2");
             finalPaymentLabel.Text = payment.ToString("n2");
@@ -435,137 +463,84 @@ namespace Bonus_Program
         }
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            if(currentGV.Rows.Count <= 0)
+            if (currentGV.Rows.Count <= 0)
             {
                 MessageBox.Show("No products in list!", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if(useBonus>clientBonus)
+            else if (useBonus > clientBonus)
             {
                 MessageBox.Show("Too much bonus!", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if(payment<0)
+            else if (payment < 0)
             {
                 MessageBox.Show("Payment can't be less than 0!", "Info!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if(useBonus>0 && useBonus<MinBonusRedeem)
+            else if (useBonus > 0 && useBonus < MinBonusRedeem)
             {
                 FlashMessage("Below the limit!");
             }
-            else if(clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname"))
-            {
-                using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
-                {
-                    connection.Open();
-
-                    string queryUpdate = $@"UPDATE Client SET Client.Bonus = 0 WHERE Client.Id = {clientId};";
-                    SqlCommand commandUpdate = new SqlCommand(queryUpdate, connection);
-                    commandUpdate.ExecuteNonQuery();
-
-                    string bonusInsertQuery = $@"INSERT INTO Bonus(ClientId, ManagerId, UsedBonus, NewBonus, Payed, Total, Date)
-                                             OUTPUT INSERTED.ID
-                                             VALUES({clientId}, {managerId}, 0, 0, CAST({payment} as decimal(10,2)), CAST({total} as decimal(10,2)), GETDATE())";
-                    SqlCommand bonusInsertCommand = new SqlCommand(bonusInsertQuery, connection);
-                    int lastBonusId = Convert.ToInt32(bonusInsertCommand.ExecuteScalar());
-
-                    for (int i = 0; i < currentGV.Rows.Count; i++)
-                    {
-                        string productForDb = currentGV.Rows[i].Cells["Product"].Value.ToString();
-                        float quantForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Litres"].Value.ToString());
-                        float totalForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
-
-                        string query = $@"INSERT INTO Movement(ProductId, BonusId, Quantity, Total)
-                                      SELECT Product.Id,{lastBonusId},CAST({quantForDb} as decimal(10,2)),CAST({totalForDb}as decimal(10,2))
-                                      FROM Product
-                                      WHERE Product.Fullname = '{productForDb}';";
-                        SqlCommand command = new SqlCommand(query, connection);
-                        command.ExecuteNonQuery();
-                    }
-                }
-                ResetForm();
-                ResetGV();
-                ResetFinal();
-                ResetFinalVals();
-                ResetClientInfo();
-                ResetProductInfo();
-                cardnumTB.Focus();
-            }
-            else if(total<MinPriceForBonus)
-            {
-                using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
-                {
-                    connection.Open();
-
-                    string queryUpdate = $@"UPDATE Client SET Client.Bonus = CAST({clientBonus - useBonus} as decimal(10,2)) WHERE Client.Id = {clientId};";
-                    SqlCommand commandUpdate = new SqlCommand(queryUpdate, connection);
-                    commandUpdate.ExecuteNonQuery();
-
-                    string bonusInsertQuery = $@"INSERT INTO Bonus(ClientId, ManagerId, UsedBonus, NewBonus, Payed, Total, Date)
-                                             OUTPUT INSERTED.ID
-                                             VALUES({clientId}, {managerId}, CAST({useBonus} as decimal(10,2)), 0, CAST({payment} as decimal(10,2)), CAST({total} as decimal(10,2)), GETDATE())";
-                    SqlCommand bonusInsertCommand = new SqlCommand(bonusInsertQuery, connection);
-                    int lastBonusId = Convert.ToInt32(bonusInsertCommand.ExecuteScalar());
-
-                    for (int i = 0; i < currentGV.Rows.Count; i++)
-                    {
-                        string productForDb = currentGV.Rows[i].Cells["Product"].Value.ToString();
-                        float quantForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Litres"].Value.ToString());
-                        float totalForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
-
-                        string query = $@"INSERT INTO Movement(ProductId, BonusId, Quantity, Total)
-                                      SELECT Product.Id,{lastBonusId},CAST({quantForDb} as decimal(10,2)),CAST({totalForDb}as decimal(10,2))
-                                      FROM Product
-                                      WHERE Product.Fullname = '{productForDb}';";
-                        SqlCommand command = new SqlCommand(query, connection);
-                        command.ExecuteNonQuery();
-                    }
-                }
-                ResetForm();
-                ResetGV();
-                ResetFinal();
-                ResetFinalVals();
-                ResetClientInfo();
-                ResetProductInfo();
-                cardnumTB.Focus();
-            }
             else
             {
-                using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
-                {
-                    connection.Open();
-
-                    string queryUpdate = $@"UPDATE Client SET Client.Bonus = CAST({clientBonus - useBonus + newBonus} as decimal(10,2)) WHERE Client.Id = {clientId};";
-                    SqlCommand commandUpdate = new SqlCommand(queryUpdate, connection);
-                    commandUpdate.ExecuteNonQuery();
-
-                    string bonusInsertQuery = $@"INSERT INTO Bonus(ClientId, ManagerId, UsedBonus, NewBonus, Payed, Total, Date)
-                                             OUTPUT INSERTED.ID
-                                             VALUES({clientId}, {managerId}, CAST({useBonus} as decimal(10,2)), CAST({newBonus} as decimal(10,2)), CAST({payment} as decimal(10,2)), CAST({total} as decimal(10,2)), GETDATE())";
-                    SqlCommand bonusInsertCommand = new SqlCommand(bonusInsertQuery, connection);
-                    int lastBonusId = Convert.ToInt32(bonusInsertCommand.ExecuteScalar());
-
-                    for (int i = 0; i < currentGV.Rows.Count; i++)
-                    {
-                        string productForDb = currentGV.Rows[i].Cells["Product"].Value.ToString();
-                        float quantForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Litres"].Value.ToString());
-                        float totalForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
-
-                        string query = $@"INSERT INTO Movement(ProductId, BonusId, Quantity, Total)
-                                      SELECT Product.Id,{lastBonusId},CAST({quantForDb} as decimal(10,2)),CAST({totalForDb}as decimal(10,2))
-                                      FROM Product
-                                      WHERE Product.Fullname = '{productForDb}';";
-                        SqlCommand command = new SqlCommand(query, connection);
-                        command.ExecuteNonQuery();
-                    }
-                }
-                ResetForm();
-                ResetGV();
-                ResetFinal();
-                ResetFinalVals();
-                ResetClientInfo();
-                ResetProductInfo();
-                cardnumTB.Focus();
+                PerformTransaction();
             }
         }
+
+        private void PerformTransaction()
+        {
+            bool isNoname = clientName.ToLower().Contains("noname") || clientLastname.ToLower().Contains("noname");
+            decimal actualNewBonus = isNoname || total < MinPriceForBonus ? 0m : (decimal)newBonus;
+            decimal newClientBonus = (decimal)clientBonus - (decimal)useBonus + actualNewBonus;
+
+            using (var db = new BonusDbContext())
+            {
+                var client = db.Clients.Find(clientId);
+                if (client == null) return;
+
+                client.Bonus = newClientBonus;
+
+                var bonusTx = new Models.BonusTransaction
+                {
+                    ClientId = clientId,
+                    ManagerId = managerId,
+                    UsedBonus = (decimal)useBonus,
+                    NewBonus = actualNewBonus,
+                    Payed = (decimal)payment,
+                    Total = (decimal)total,
+                    Date = DateTime.Now
+                };
+                db.BonusTransactions.Add(bonusTx);
+                db.SaveChanges();
+
+                for (int i = 0; i < currentGV.Rows.Count; i++)
+                {
+                    string productForDb = currentGV.Rows[i].Cells["Product"].Value.ToString();
+                    float quantForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Litres"].Value.ToString());
+                    float totalForDb = Convert.ToSingle(currentGV.Rows[i].Cells["Total"].Value.ToString());
+
+                    var product = db.Products.FirstOrDefault(p => p.Fullname == productForDb);
+                    if (product != null)
+                    {
+                        db.Movements.Add(new Models.Movement
+                        {
+                            ProductId = product.Id,
+                            BonusId = bonusTx.Id,
+                            Quantity = (decimal)quantForDb,
+                            Total = (decimal)totalForDb
+                        });
+                    }
+                }
+                db.SaveChanges();
+            }
+
+            ResetForm();
+            ResetGV();
+            ResetFinal();
+            ResetFinalVals();
+            ResetClientInfo();
+            ResetProductInfo();
+            cardnumTB.Focus();
+        }
+
         private void newClientButton_Click(object sender, EventArgs e)
         {
             ClientForm client = new ClientForm();
@@ -574,7 +549,7 @@ namespace Bonus_Program
 
         private void reportButton1_Click(object sender, EventArgs e)
         {
-            if(managerIsAdmin)
+            if (_isAdmin)
             {
                 ReportForm1 report = new ReportForm1();
                 report.ShowDialog();
@@ -586,7 +561,7 @@ namespace Bonus_Program
         }
         private void reportButton2_Click(object sender, EventArgs e)
         {
-            if (managerIsAdmin)
+            if (_isAdmin)
             {
                 ReportForm2 report = new ReportForm2();
                 report.ShowDialog();
@@ -606,12 +581,10 @@ namespace Bonus_Program
         {
             if (cardnumTB.Text != string.Empty)
             {
-                using (SqlConnection connection = new SqlConnection(LoginForm.ConStr))
+                string cardNumber = cardnumTB.Text.Trim();
+                using (var db = new BonusDbContext())
                 {
-                    connection.Open();
-                    string clientIdQuery = $@"SELECT Client.Id FROM Client WHERE Client.CardNumber = '{cardnumTB.Text}';";
-                    SqlCommand clientIdCommand = new SqlCommand(clientIdQuery, connection);
-                    int clientId = Convert.ToInt32(clientIdCommand.ExecuteScalar());
+                    var client = db.Clients.FirstOrDefault(c => c.CardNumber == cardNumber);
 
                     ResetForm();
                     ResetFinal();
@@ -620,16 +593,16 @@ namespace Bonus_Program
                     ResetClientInfo();
                     ResetProductInfo();
 
-                    if (clientId == 0)
+                    if (client == null)
                     {
                         MessageBox.Show("Client not found!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        GetClientInfo(clientId);
+                        GetClientInfo(client.Id);
                         clientNameLabel.Text = clientName + " " + clientLastname;
                         clientBonusLabel.Text = "Bonus: " + clientBonus.ToString("n2");
-
+                        cardnumTB.Text = cardNumber;
                         productsTLP.Enabled = true;
                     }
                 }
@@ -639,23 +612,40 @@ namespace Bonus_Program
         private bool isPressed = false;
         private void cardnumTB_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !isPressed)
+            if (_isAdmin)
             {
-                isPressed = true;
-                FindClient();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-            else if (e.Control && e.Alt && e.KeyCode == Keys.L && !isPressed)
-            {
-                isPressed = true;
-                tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
-                if (tableLayoutPanel26.Visible)
+                if (e.KeyCode == Keys.Enter && !isPressed)
                 {
-                    limitValue.Text = MinPriceForBonus.ToString("n2");
+                    isPressed = true;
+                    FindClient();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
-                e.Handled = true;
-                e.SuppressKeyPress = true;
+                else if (e.Control && e.Alt && e.KeyCode == Keys.L && !isPressed)
+                {
+                    isPressed = true;
+                    tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
+                    if (tableLayoutPanel26.Visible)
+                    {
+                        limitValue.Text = MinPriceForBonus.ToString("n2");
+                    }
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            else
+            {
+                if (e.Control && e.Alt && e.KeyCode == Keys.L && !isPressed)
+                {
+                    isPressed = true;
+                    tableLayoutPanel26.Visible = !tableLayoutPanel26.Visible;
+                    if (tableLayoutPanel26.Visible)
+                    {
+                        limitValue.Text = MinPriceForBonus.ToString("n2");
+                    }
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
             }
         }
         private void cardnumTB_KeyUp(object sender, KeyEventArgs e)
@@ -671,7 +661,7 @@ namespace Bonus_Program
         private void simpleButton4_Click(object sender, EventArgs e)
         {
             SaveMinLimit();
-            if(limitValue.Text == String.Empty)
+            if (limitValue.Text == String.Empty)
             {
                 MinPriceForBonus = 0;
             }
@@ -685,7 +675,7 @@ namespace Bonus_Program
         private void SaveMinLimit()
         {
             LimitValue minLimit = new LimitValue();
-            if(limitValue.Text == String.Empty)
+            if (limitValue.Text == String.Empty)
             {
                 minLimit.MinPrice = 0;
             }
