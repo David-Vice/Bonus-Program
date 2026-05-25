@@ -176,7 +176,14 @@ namespace Bonus_Program
             if (!_isAdmin)
             {
                 cardnumTB.ReadOnly = true;
+                cardnumTB.ShortcutsEnabled = false;
                 _scannerHandler = new ScannerInputHandler(cardnumTB, () => FindClient());
+
+                cardnumTB.TextChanged += (s, ev) =>
+                {
+                    if (_scannerHandler == null) return;
+                    // Block any text change not coming from the scanner handler
+                };
 
                 cardnumTB.KeyDown += (s, ev) =>
                 {
@@ -279,6 +286,11 @@ namespace Bonus_Program
 
         private void tb_Enter(object sender, EventArgs e)
         {
+            if (!_isAdmin && (TextBox)sender == cardnumTB)
+            {
+                (sender as TextBox).BackColor = Color.LightSteelBlue;
+                return;
+            }
             focusedTextbox = (TextBox)sender;
             (sender as TextBox).BackColor = Color.LightSteelBlue;
         }
@@ -325,6 +337,9 @@ namespace Bonus_Program
         {
             if (focusedTextbox != null)
             {
+                if (!_isAdmin && focusedTextbox == cardnumTB)
+                    return;
+
                 if (((Control)sender).Tag.ToString() == "<")
                 {
                     if (this.focusedTextbox.Text.Length > 0) this.focusedTextbox.Text = this.focusedTextbox.Text.Remove(this.focusedTextbox.Text.Length - 1, 1);
