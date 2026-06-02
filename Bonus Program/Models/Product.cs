@@ -15,6 +15,7 @@ namespace Bonus_Program.Models
 
         public decimal Price { get; set; }
 
+        [Column(TypeName = "decimal(18,4)")]
         public decimal BonusPercent { get; set; }
 
         public virtual ICollection<Movement> Movements { get; set; }
